@@ -68,15 +68,64 @@ CREATE TABLE TAREAS (
 );
 
 CREATE TABLE ASIGNACIONES (
-	idasignaciones INT AUTO_INCREMENT PRIMARY KEY,
+	idasignacion INT AUTO_INCREMENT PRIMARY KEY,
     idusuario 	INT NOT NULL,
     idtarea 	INT NOT NULL,
     fecha_asignacion	DATE NOT NULL,
     fecha_atendido		DATE NULL,
-    estado_asignacion	
+    estado_del			BIT NOT NULL DEFAULT 1,
+    CONSTRAINT fk_idu_asig FOREIGN KEY (idusuario) REFERENCES USUARIOS(idusuario),
+    CONSTRAINT fk_idt_asig FOREIGN KEY (idtarea) REFERENCES TAREAS (idtarea)
 );
 
+CREATE TABLE ANEXOS (
+	idanexo		INT AUTO_INCREMENT PRIMARY KEY,
+    idproyecto 	INT NOT NULL,
+    idtarea		INT NOT NULL, 
+    idasignacion	INT NOT NULL,
+    idusuario		INT NOT NULL,
+    descripcion 	VARCHAR(200) NULL,
+    doc				VARCHAR(200) NULL,
+    tipo_recurso	VARCHAR(50) NULL,
+	CONSTRAINT fk_idp_ane FOREIGN KEY (idproyecto) REFERENCES PROYECTOS (idproyecto),
+    CONSTRAINT fk_idt_ane FOREIGN KEY (idtarea ) REFERENCES TAREAS (idtarea),
+    CONSTRAINT fk_asig_ane FOREIGN KEY (idasignacion) REFERENCES ASIGNACIONES (idasignacion),
+    CONSTRAINT fk_idusu_ane FOREIGN KEY (idusuario) REFERENCES USUARIOS (idusuario)
+);
 
+CREATE TABLE COMENTARIOS (
+	idcomentario 	INT AUTO_INCREMENT PRIMARY KEY,
+    idproyecto 		INT NOT NULL,
+    idtarea 		INT NOT NULL,
+    idasignacion	INT NOT NULL,
+    idusuario 		INT NOT NULL,
+    comentario		VARCHAR(200) NOT NULL,
+    fecha_coment 	DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_idp_com FOREIGN KEY (idproyecto) REFERENCES PROYECTOS (idproyecto),
+    CONSTRAINT fk_idt_com FOREIGN KEY (idtarea ) REFERENCES TAREAS (idtarea),
+    CONSTRAINT fk_asig_com FOREIGN KEY (idasignacion) REFERENCES ASIGNACIONES (idasignacion),
+    CONSTRAINT fk_idusu_com FOREIGN KEY (idusuario) REFERENCES USUARIOS (idusuario)
+);
+
+CREATE TABLE METRICAS (
+	idmetrica 	INT AUTO_INCREMENT PRIMARY KEY,
+    idtarea		INT NOT NULL, 
+    nombre_metrica 	 VARCHAR(30) NOT NULL,
+    valor_decimal    DECIMAL(10,2) NULL,
+    valor_entero	 INT NULL,
+    tipo_valor 		VARCHAR(30) NOT NULL, -- ENTERO , DECIMAL , CUALITATIVA
+    fecha_registro	DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT fk_idt_met FOREIGN KEY (idtarea ) REFERENCES TAREAS (idtarea)
+);
+
+CREATE TABLE PRESUPUESTOS (
+	idprepuesto	 INT AUTO_INCREMENT PRIMARY KEY,
+    idproyecto 		INT NOT NULL,
+	monto_estimado  DECIMAL(10, 2) NOT NULL,
+    monto_gastado 	DECIMAL(10, 2) NOT NULL,
+    detalle_gasto	VARCHAR(250) NOT NULL,
+	CONSTRAINT fk_idp_pre FOREIGN KEY (idproyecto) REFERENCES PROYECTOS (idproyecto)
+);
 	
 
 

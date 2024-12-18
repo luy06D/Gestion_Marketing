@@ -1,13 +1,13 @@
 import {Button} from "@nextui-org/react";
 import './App.css'
-
+import {MyRoutes} from './routers/routes'
 
 function App() {
   
   return (  
-     
-    <Button color="primary">Button</Button>
-  
+     <>
+      <MyRoutes />
+     </>
   )
 }
 

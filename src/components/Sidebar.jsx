@@ -6,9 +6,16 @@ import { AiOutlineLeft } from "react-icons/ai";
 
 
 const Sidebar = ({sidebarOpen, setSidebarOpen }) => {
+
+const ModSideBarOpen=()=>{
+  setSidebarOpen(!sidebarOpen);
+
+}
+
+
   return (
     <Container isOpen= {sidebarOpen}> 
-      <button className="SiderbarButton">
+      <button className="SiderbarButton" onClick={ModSideBarOpen} >
         <AiOutlineLeft/>
       </button>
       <div className='logoContent'>

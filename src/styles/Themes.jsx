@@ -15,7 +15,7 @@ export const Light ={
     navHeight: "5rem",
     whiteBg:"#7250FF",
     bg: "rgb(255,255,255)",
-    bgAlpha: "rgba(200, 1, 1, 0.3)",
+    bgAlpha: "rgba(153, 141, 141, 0.3)",
     bg2: "rgb(245,245,245)",
     bg3: "rgb(230,230,230)",
     text: "rgb(45,45,45)",

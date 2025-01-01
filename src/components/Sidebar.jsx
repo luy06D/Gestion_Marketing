@@ -2,7 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import logo from '../assets/react.svg'
 import {v} from '../styles/Variables'
-import { AiOutlineLeft } from "react-icons/ai";
+import { AiOutlineLeft ,
+  AiFillHome, 
+  AiOutlineDeploymentUnit,
+  AiOutlineFile } from "react-icons/ai";
+import { Link } from 'react-router-dom';
+import { MdHome } from "react-icons/md";
 
 
 const Sidebar = ({sidebarOpen, setSidebarOpen }) => {
@@ -21,17 +26,57 @@ const ModSideBarOpen=()=>{
       <div className='logoContent'>
         <div className='img_content'>
           <img src={logo} alt="" />
-        </div>
+      </div>
+
         <h2>MARKETING</h2>
 
       </div>
+      {linksArray.map(({icon, label,  to})=>(
+
+        <div className='LinkContainer' key={label}>
+          <Link to={to} className='Links'>
+            <div className='LinkIcon'>
+              {icon}
+            </div>
+            {sidebarOpen && (<span>{label}</span>)
+            }
+            
+          </Link>
+        </div>
+      ))}
     </Container>
   )
 }
 
+//#region Data links
+
+const linksArray = [
+  {
+    label: "Inicio",
+    icon : <AiFillHome/>,
+    to : "/",
+  },
+  {
+    label: "Proyectos",
+    icon : <AiOutlineDeploymentUnit/>,
+    to : "/proyectos",
+  },
+  {
+    label: "Tareas",
+    icon : <AiOutlineFile />,
+    to : "/tareas",
+  },
+
+
+]
+
+//#endregion
+
+
+//#region styles components
 const Container = styled.div`
   color:${(props) =>props.theme.text};
-  background:${(props) =>props.theme.primary};
+  background:${(props) =>props.theme.barrascroll};
   position: sticky;
   padding-top: 20px;
 
@@ -66,22 +111,50 @@ const Container = styled.div`
       display: flex;
       cursor: pointer;
       transition: all 0.3s;
-      transform: ${({isOpen}) =>(isOpen? `scale(0.7)`: `scale(0.5)`)};
+      transform: ${({isOpen}) =>(isOpen? `scale(0.7)`: `scale(0.9)`)};
 
       img{
         max-width: 100%;
         height: auto;
       }
     }
+    h2{
+      display: ${({isOpen}) =>(isOpen?`block`: `none`)};
+    }
     
 
   }
 
-  h2{
-    display: ${({isOpen}) =>(isOpen?`block`: `none`)};
+  .LinkContainer{
+    margin: 8px 0;
+    padding: 0 15%;
+    :hover{
+      background: ${(props) => props.theme.bg3};
+    }
+  }
+
+  .Links{
+    display:flex;
+    align-items: center;
+    text-decoration: none;
+    padding: calc(${v.smSpacing} -2px) 0;
+    .LinkIcon{
+      padding: ${v.smSpacing} ${v.mdSpacing};
+      display: flex;
+      svg{
+        font-size:25px;
+      }
+
+    }
   }
 
 
+
+
 `;
+
+//#endregion
+
+
 
 export default Sidebar

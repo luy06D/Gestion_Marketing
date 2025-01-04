@@ -45,6 +45,7 @@ const Container = styled.div`
   display:grid;
   grid-template-columns: 100px auto;
   background: ${({ theme }) => theme.bgAlpha};
+  transition: all 0.4s;
   &.active{
     grid-template-columns: 300px auto; 
   

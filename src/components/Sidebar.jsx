@@ -6,7 +6,7 @@ import { AiOutlineLeft ,
   AiFillHome, 
   AiOutlineDeploymentUnit,
   AiOutlineFile } from "react-icons/ai";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { MdHome } from "react-icons/md";
 
 
@@ -34,14 +34,14 @@ const ModSideBarOpen=()=>{
       {linksArray.map(({icon, label,  to})=>(
 
         <div className='LinkContainer' key={label}>
-          <Link to={to} className='Links'>
+          <NavLink to={to} className={({isActive})=>`Links ${isActive?`active`: ``}` }  >
             <div className='LinkIcon'>
               {icon}
             </div>
             {sidebarOpen && (<span>{label}</span>)
             }
             
-          </Link>
+          </NavLink>
         </div>
       ))}
     </Container>
@@ -141,10 +141,18 @@ const Container = styled.div`
     .LinkIcon{
       padding: ${v.smSpacing} ${v.mdSpacing};
       display: flex;
+
       svg{
         font-size:25px;
       }
 
+    }
+    &.active{
+      .LinkIcon{
+        svg{
+          color:${(props)=>props.theme.bg4};
+        }
+      }
     }
   }
 

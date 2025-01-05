@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
-import logo from '../assets/react.svg'
+import logo from '../assets/market.svg'
 import {v} from '../styles/Variables'
 import { AiOutlineLeft ,
   AiFillHome, 
   AiOutlineDeploymentUnit,
-  AiOutlineFile } from "react-icons/ai";
+  AiOutlineFile,
+  AiOutlineExclamationCircle,
+  AiOutlineSetting  } from "react-icons/ai";
+import { BsGear } from "react-icons/bs";
 import { NavLink } from 'react-router-dom';
-import { MdHome } from "react-icons/md";
+import {Divider} from "@nextui-org/divider";
+import {Switch} from "@nextui-org/react";
+import { ThemeContext } from '../App';
 
 
 const Sidebar = ({sidebarOpen, setSidebarOpen }) => {
@@ -16,6 +21,13 @@ const ModSideBarOpen=()=>{
   setSidebarOpen(!sidebarOpen);
 
 }
+
+const {setTheme, theme} = useContext(ThemeContext);
+
+const changeTheme =()=>{
+  setTheme((theme) => (theme==="light"?"dark":"light"))
+}
+
 
 
   return (
@@ -44,7 +56,32 @@ const ModSideBarOpen=()=>{
           </NavLink>
         </div>
       ))}
+
+      <Divider className='mt-5'/>
+
+      {secondLinksArray.map(({icon, label,  to})=>(
+
+        <div className='LinkContainer' key={label}>
+          <NavLink to={to} className={({isActive})=>`Links ${isActive?`active`: ``}` }  >
+            <div className='LinkIcon'>
+              {icon}
+            </div>
+            {sidebarOpen && (<span>{label}</span>)
+            }
+            
+          </NavLink>
+        </div>
+        ))}
+
+      <Divider className='mt-5'/>
+      
+      <div className=''>
+        <Switch onClick={changeTheme}/>
+        <span>DARMODE</span>
+      </div>
+
     </Container>
+    
   )
 }
 
@@ -70,15 +107,31 @@ const linksArray = [
 
 ]
 
+
+const secondLinksArray = [
+  {
+    label: "Ajustes",
+    icon : <AiOutlineSetting/>,
+    to : "/Ajustes",
+  },
+  {
+    label: "Ayuda",
+    icon : <AiOutlineExclamationCircle  />,
+    to : "/Ayuda",
+  },
+
+
+]
 //#endregion
 
 
 //#region styles components
 const Container = styled.div`
   color:${(props) =>props.theme.text};
-  background:${(props) =>props.theme.barrascroll};
+  background:${(props) =>props.theme.bg};
   position: sticky;
   padding-top: 20px;
+  height: 100vh;
 
   .SiderbarButton{
     position: absolute;

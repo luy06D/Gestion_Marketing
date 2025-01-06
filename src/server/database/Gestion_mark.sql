@@ -35,6 +35,7 @@ CREATE TABLE USUARIOS (
     user_name VARCHAR(30) NOT NULL,
     password_usu VARCHAR(30) NOT NULL,
     nivel_acceso VARCHAR(15) NOT NULL,
+    rol 	VARCHAR(30) NOT NULL,
     estado  BIT NOT NULL DEFAULT 1,
     img_perfil  VARCHAR(250) NULL,
     CONSTRAINT fk_idp_usu FOREIGN KEY (idpersona) REFERENCES PERSONAS (idpersona),

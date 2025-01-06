@@ -7,8 +7,9 @@ import { AiOutlineLeft ,
   AiOutlineDeploymentUnit,
   AiOutlineFile,
   AiOutlineExclamationCircle,
-  AiOutlineSetting  } from "react-icons/ai";
-import { BsGear } from "react-icons/bs";
+  AiOutlineSetting,
+  AiOutlineUser,
+  AiOutlineFilePdf   } from "react-icons/ai";
 import { NavLink } from 'react-router-dom';
 import {Divider} from "@nextui-org/divider";
 import {Switch} from "@nextui-org/react";
@@ -66,8 +67,7 @@ const changeTheme =()=>{
             <div className='LinkIcon'>
               {icon}
             </div>
-            {sidebarOpen && (<span>{label}</span>)
-            }
+            {sidebarOpen && (<span>{label}</span>)}
             
           </NavLink>
         </div>
@@ -77,7 +77,7 @@ const changeTheme =()=>{
       
       <div className=''>
         <Switch onClick={changeTheme}/>
-        <span>DARMODE</span>
+        {sidebarOpen && (<span>DARKMODE</span>)}
       </div>
 
     </Container>
@@ -102,6 +102,16 @@ const linksArray = [
     label: "Tareas",
     icon : <AiOutlineFile />,
     to : "/tareas",
+  },
+  {
+    label: "Reportes",
+    icon : <AiOutlineFilePdf  />,
+    to : "/Reportes",
+  },
+  {
+    label: "Usuarios",
+    icon : <AiOutlineUser  />,
+    to : "/Usuarios",
   },
 
 

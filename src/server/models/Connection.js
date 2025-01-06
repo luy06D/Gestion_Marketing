@@ -16,6 +16,6 @@ stringConnection.connect( function(err){
     }
 });
 
-
-
 stringConnection.end();
+
+export default stringConnection;

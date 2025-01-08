@@ -1,13 +1,11 @@
 import React from 'react'
 import styled from 'styled-components';
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
+import { Modal, ModalContent, ModalHeader, ModalBody,
   ModalFooter,
   Button,
-  useDisclosure,
+  Input,
+  Select,
+  SelectItem
 } from "@nextui-org/react";
 
 const ModalUsuario = ({isOpen , onClose}) => {
@@ -19,32 +17,41 @@ const ModalUsuario = ({isOpen , onClose}) => {
     <ModalContent>
       {(onClose) => (
         <>
-          <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+          <ModalHeader className="flex flex-col gap-1">REGISTRO DE USUARIOS</ModalHeader>
           <ModalBody>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
-              risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor
-              quam.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
-              risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor
-              quam.
-            </p>
-            <p>
-              Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit dolor
-              adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. Velit duis sit
-              officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. Et mollit incididunt
-              nisi consectetur esse laborum eiusmod pariatur proident Lorem eiusmod et. Culpa
-              deserunt nostrud ad veniam.
-            </p>
+          <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+            <Input label="Nombres" type="text" />
+            <Input label="Apellidos" type="text" />
+          </div>
+          <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+            <Input label="DNI" type="number" />
+            <Input label="Correo" type="email" />
+          </div>
+          <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+            <Input label="Usuario" type="text" />
+            <Input label="Contraseña" type="password" />
+          </div>
+          <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+          <Select className="max-w-xs" label="Nivel de acceso">
+            {acceso.map((access) => (
+              <SelectItem key={access.key}>{access.label}</SelectItem>
+            ))}
+          </Select>
+          </div>
+          <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+          <Select className="max-w-xs" label="Rol">
+            {roles.map((rol) => (
+              <SelectItem key={rol.key}>{rol.label}</SelectItem>
+            ))}
+          </Select>
+          </div>
           </ModalBody>
           <ModalFooter>
             <Button color="danger" variant="light" onPress={onClose}>
-              Close
+              CERRAR
             </Button>
             <Button color="primary" onPress={onClose}>
-              Action
+              REGISTRAR
             </Button>
           </ModalFooter>
         </>
@@ -53,5 +60,22 @@ const ModalUsuario = ({isOpen , onClose}) => {
     </Modal>
   )
 }
+
+export const acceso = [
+  {key: "administrador", label: "Administrador"},
+  {key: "invitado", label: "Invitado"},
+  
+];
+
+
+export const roles = [
+  {key: "gestor_proyectos", label: "Gestor de proyectos"},
+  {key: "editor_conten", label: "Editor de contenido"},
+  {key: "Diseñador", label: "Diseñador"},
+  {key: "Analista", label: "Analista"},
+  {key: "Supervisor", label: "Supervisor"},
+  {key: "Financiero", label: "Financiero"},
+  
+];
 
 export default ModalUsuario

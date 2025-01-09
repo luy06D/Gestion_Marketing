@@ -16,6 +16,7 @@
     "@fontsource/permanent-marker": "^5.0.12",
     "@fontsource/rampart-one": "^5.0.19",
     "@nextui-org/react": "^2.4.1",
+    "express": "^4.21.2",
     "framer-motion": "^11.2.10",
     "just-debounce-it": "3.2.0",
     "mysql2": "^3.11.5",

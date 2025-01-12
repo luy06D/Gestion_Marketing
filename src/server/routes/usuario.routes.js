@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const usuarioController = require('../controllers/usuarios.controllers');
+import {Router} from 'express';
+import usuarioController from '../controllers/usuarios.controllers.js';
 
+const router = Router();
 
 // RUTAS PARA LAS OPERACIONES CRUD 
 router.get('/', usuarioController.listarUsers);
 
-module.exports = router;
+export default router;
 
 

@@ -1,7 +1,8 @@
-const Usuario = require('../models/usuarios.models')
+import Usuario from '../models/usuarios.models.js';
+
 
 //OBTENER LISTA DE USUARIOS
-exports.listarUsers = async (rep, response) =>{
+const listarUsers = async (rep, response) =>{
     try{
         const user = await Usuario.listarUsuarios();
         response.json(user);    
@@ -10,3 +11,5 @@ exports.listarUsers = async (rep, response) =>{
         response.status(500).json({message: 'Error al obtener listado de usuarios', err});
     }
 }
+
+export default listarUsers;

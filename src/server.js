@@ -1,16 +1,20 @@
 import express from 'express';
-import usuarioRoutes from '../src/server/routes/usuario.routes';
-
-// MIDDLEWARES
-app.use(express.json()); // PARSEAMOS EN JSON
+import dotenv from 'dotenv';
+import cors from 'cors';
 
 
-// USAMOS LAS RUTAS 
+dotenv.config();
+const app = express();
 
-app.use('/api/usuarios', usuarioRoutes);
+const port = process.env.PORT || 3000;
 
-// PUERTO DEL SERVIDOR 
-const PORT = 5000;
-app.listen(PORT, ()=> {
-    console.log(`Servidor corriendo en el puerto ${PORT}`)
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (rep, res) => {
+    res.send('Backend NodeJS corriendo.... ');
+});
+
+app.listen(port, ()=>{
+    console.log("PORT =>", port);
 });

@@ -1,4 +1,4 @@
-import stringConnection from "./Connection";
+import stringConnection from "./Connection.js";
 
 const Usuario = {
     
@@ -9,7 +9,7 @@ const Usuario = {
     }
 }
 
-module.exports = Usuario;
+export default Usuario; 
 
 
 

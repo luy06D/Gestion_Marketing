@@ -11,6 +11,8 @@ BEGIN
 END //
 DELIMITER ;
 
+	
+
 
 
 -- REGISTRO DE USUARIOS 

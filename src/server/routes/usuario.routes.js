@@ -1,11 +1,9 @@
-import {Router} from 'express';
-import usuarioController from '../controllers/usuarios.controllers.js';
+import express from 'express';
+import usuariosControllers from '../controllers/usuarios.controllers.js';
+const  router = express.Router();
 
-const router = Router();
-
-// RUTAS PARA LAS OPERACIONES CRUD 
-router.get('/', usuarioController.listarUsers);
-
-export default router;
+router
+    .get('/', usuariosControllers.getUsers);
 
 
+export default router; 

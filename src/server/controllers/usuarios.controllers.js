@@ -1,15 +1,16 @@
-import Usuario from '../models/usuarios.models.js';
+import UsuarioService from "../service/usuario.service.js";
+const service = new UsuarioService();
 
-
-//OBTENER LISTA DE USUARIOS
-const listarUsers = async (rep, response) =>{
+// LISTAR LOS USUARIOS 
+const getUsers = async (req, res) => {
     try{
-        const user = await Usuario.listarUsuarios();
-        response.json(user);    
+        const response = await service.listarUsers();
+        res.json(response);
 
     }catch(err){
-        response.status(500).json({message: 'Error al obtener listado de usuarios', err});
+        res.status(500).send({success: false, message: err.message});
     }
 }
 
-export default listarUsers;
+
+export default {getUsers}

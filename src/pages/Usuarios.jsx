@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import {Button} from "@nextui-org/react";
+import {Button, user} from "@nextui-org/react";
 import Modal from '../components/ModalUsuario'
 import {
   Table,
@@ -14,10 +14,21 @@ import {
 
 const Usuarios = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [users, setUsers] = useState([]); // Almacenamos los usuarios
+
+  useEffect(() =>{
+    fetch('http://localhost:3000/api/v1/usuario')
+    .then(response => response.json())
+    .then(data => {
+      const arrayData = Array.isArray(data) ? data : [data];
+      setUsers(arrayData);
+    })
+    .catch(err => console.error('Error fetching data:', err))
+  }, []);
+
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
-
 
   return (
     <Container>
@@ -30,12 +41,16 @@ const Usuarios = () => {
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
       </TableHeader>
-      <TableBody items={rows}>
-        {(item) => (
-          <TableRow key={item.key}>
-            {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
+
+      <TableBody>
+        {users.map((item, index) => (
+          <TableRow key={index}>
+            <TableCell>{item.usuario}</TableCell>
+            <TableCell>{item.user_name}</TableCell>
+            <TableCell>{item.nivel_acceso}</TableCell>
+            <TableCell>{item.rol}</TableCell>
           </TableRow>
-        )}
+        ))}
       </TableBody>
     </Table>
 
@@ -44,46 +59,25 @@ const Usuarios = () => {
   )
 }
 
-const rows = [
-  {
-    key: "1",
-    name: "Tony Reichert",
-    role: "CEO",
-    status: "Active",
-  },
-  {
-    key: "2",
-    name: "Zoey Lang",
-    role: "Technical Lead",
-    status: "Paused",
-  },
-  {
-    key: "3",
-    name: "Jane Fisher",
-    role: "Senior Developer",
-    status: "Active",
-  },
-  {
-    key: "4",
-    name: "William Howard",
-    role: "Community Manager",
-    status: "Vacation",
-  },
-];
+
 
 const columns = [
   {
-    key: "name",
-    label: "NAME",
+    key: "usuario",
+    label: "NOMBRE",
   },
   {
-    key: "role",
-    label: "ROLE",
+    key: "user_name",
+    label: "USUARIO",
   },
   {
-    key: "status",
-    label: "STATUS",
+    key: "nivel_acceso",
+    label: "NIVEL ACCESO",
   },
+  {
+    key: "rol",
+    label: "ROL"
+  }
 ];
 
 const Container = styled.div`

@@ -12,5 +12,18 @@ const getUsers = async (req, res) => {
     }
 }
 
+// REGISTRAR USUARIOS
+const createUsers = async (req, res) => {
+    try{
+        const userData = req.body; // Extraemos los datos
+        const response = await service.registrarUsers(userData);
+        
+        res.status(201).json({success: true, data: response})  
 
-export default {getUsers}
+    }catch(err){
+        res.status(500).send({success: false, message: err.message});
+    }
+}
+
+
+export default {getUsers, createUsers}

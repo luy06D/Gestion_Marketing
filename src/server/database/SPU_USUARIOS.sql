@@ -4,16 +4,14 @@ USE Gestion_mark;
 DELIMITER //
 CREATE PROCEDURE spu_listar_user()
 BEGIN
-	SELECT CONCAT(nombre, ' ', apellido) AS usuario,
-    user_name, nivel_acceso, rol 
+	SELECT idusuario, CONCAT(nombre, ' ', apellido) AS usuario,
+    user_name, nivel_acceso, estado, rol 
     FROM USUARIOS USU 
     INNER JOIN PERSONAS PE ON USU.idpersona = PE.idpersona;
 END //
 DELIMITER ;
 
-	
-
-
+CALL spu_listar_user();
 
 -- REGISTRO DE USUARIOS 
 DELIMITER //

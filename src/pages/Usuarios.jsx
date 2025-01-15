@@ -9,7 +9,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  getKeyValue,
+  Chip,
 } from "@nextui-org/react";
 
 const Usuarios = () => {
@@ -26,6 +26,7 @@ const Usuarios = () => {
     .catch(err => console.error('Error fetching data:', err))
   }, []);
 
+  console.log(users)
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
@@ -45,9 +46,13 @@ const Usuarios = () => {
       <TableBody>
         {users.map((item, index) => (
           <TableRow key={index}>
+            <TableCell>{item.idusuario}</TableCell>
             <TableCell>{item.usuario}</TableCell>
             <TableCell>{item.user_name}</TableCell>
             <TableCell>{item.nivel_acceso}</TableCell>
+            <TableCell>
+              <Chip color='success' variant='shadow'>{item.estado?.data[0] === 1 ? "Activo" : "Inactivo"}</Chip>
+            </TableCell>
             <TableCell>{item.rol}</TableCell>
           </TableRow>
         ))}
@@ -63,6 +68,10 @@ const Usuarios = () => {
 
 const columns = [
   {
+    key: "idusuario",
+    label: "ITEM",
+  },
+  {
     key: "usuario",
     label: "NOMBRE",
   },
@@ -73,6 +82,10 @@ const columns = [
   {
     key: "nivel_acceso",
     label: "NIVEL ACCESO",
+  },
+  {
+    key: "estado",
+    label: "ESTADO",
   },
   {
     key: "rol",

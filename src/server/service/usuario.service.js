@@ -10,12 +10,6 @@ class UsuarioService{
     }
 
     async registrarUsers(data) {
-        try {
-            // Verificamos que todos los datos necesarios estén presentes
-            if (!data.nombre || !data.apellido || !data.doc_identidad || !data.email || 
-                !data.user_name || !data.password_usu || !data.nivel_acceso || !data.rol) {
-                throw new Error("Faltan datos requeridos");
-            }
 
             const resultado = await sequelize.query(
                 `CALL spu_registro_user(
@@ -38,26 +32,21 @@ class UsuarioService{
                         _password_usu: data.password_usu,
                         _nivel_acceso: data.nivel_acceso,
                         _rol: data.rol,
-                        _img_perfil: data.img_perfil || null // Hacemos opcional img_perfil
+                        _img_perfil: data.img_perfil || null
                     }
                 }
             );
-
-            return {
-                success: true,
-                message: "Usuario registrado correctamente",
-                data: resultado
-            };
-
-        } catch (error) {
-            console.log("Error detallado:", error);
-            return {
-                success: false,
-                message: error.message,
-                error: error
-            };
-        }
+            return resultado;
     }
+
+
+
+
+
+
+
+
+
 
 
 }

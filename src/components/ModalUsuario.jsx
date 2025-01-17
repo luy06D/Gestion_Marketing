@@ -11,14 +11,15 @@ import { Modal, ModalContent, ModalHeader, ModalBody,
 const ModalUsuario = ({isOpen , onClose}) => {
 
   const [formData, setFormData] = useState({
-    nombres: '',
-    apellidos: '',
-    dni: '',
-    correo: '',
-    usuario: '',
-    password: '',
-    nivelAcceso: '',
+    nombre: '',
+    apellido: '',
+    doc_identidad: '',
+    email: '',
+    user_name: '',
+    password_usu: '',
+    nivel_acceso: '',
     rol: '',
+    img_perfil: null,
   });
 
   const handleChange = (e) =>{
@@ -40,21 +41,22 @@ const ModalUsuario = ({isOpen , onClose}) => {
       });
 
       if (!res.ok) {
-        const errorData = await response.json();
+        const errorData = await res.json();
         throw new Error(errorData.message || 'Error al registrar el usuario.');
       }
 
-      const result = await response.json();
+      const result = await res.json();
       console.log('Usuario registrado:', result);
       onClose(); // Cerrar modal si el registro fue exitoso
 
-      onClose();
 
     } catch (error) {
       console.error('Error de registro: ', error.message);
       
     }
   }
+
+  console.log(formData)
 
 
   if(!isOpen) return null;
@@ -67,20 +69,20 @@ const ModalUsuario = ({isOpen , onClose}) => {
           <ModalHeader className="flex flex-col gap-1">REGISTRO DE USUARIOS</ModalHeader>
           <ModalBody>
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-            <Input label="Nombres" type="text" name='nombres' value={formData.nombres} onChange={handleChange} />
-            <Input label="Apellidos" type="text" name='apellidos' value={formData.apellidos} onChange={handleChange} />
+            <Input label="Nombres" type="text" name='nombre' value={formData.nombre} onChange={handleChange} />
+            <Input label="Apellidos" type="text" name='apellido' value={formData.apellido} onChange={handleChange} />
           </div>
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-            <Input label="DNI" type="number" name='dni' value={formData.dni} onChange={handleChange}/>
-            <Input label="Correo" type="email" name='correo' value={formData.correo} onChange={handleChange} />
+            <Input label="DNI" type="number" name='doc_identidad' value={formData.doc_identidad} onChange={handleChange}/>
+            <Input label="Correo" type="email" name='email' value={formData.email} onChange={handleChange} />
           </div>
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-            <Input label="Usuario" type="text" name='usuario' value={formData.usuario} onChange={handleChange}/>
-            <Input label="Contraseña" type="password" name='password' value={formData.password} onChange={handleChange} />
+            <Input label="Usuario" type="text" name='user_name' value={formData.user_name} onChange={handleChange}/>
+            <Input label="Contraseña" type="password" name='password_usu' value={formData.password_usu} onChange={handleChange} />
           </div>
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-          <Select className="max-w-xs" label="Nivel de acceso" name='nivelAcceso'
-          onChange={(e) => setFormData({...formData, nivelAcceso: e.target.value})}>
+          <Select className="max-w-xs" label="Nivel de acceso" name='nivel_acceso'
+          onChange={(e) => setFormData({...formData, nivel_acceso: e.target.value})}>
             {acceso.map((access) => (
               <SelectItem key={access.key}>{access.label}</SelectItem>
             ))}

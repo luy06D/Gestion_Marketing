@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const Inicio = () => {
   return (
-    <div>Inicio</div>
+    <div>INICIO</div>
   )
 }
 

@@ -1,14 +1,12 @@
 import {React, useState} from 'react'
 import styled from 'styled-components';
-import { Modal, ModalContent, ModalHeader, ModalBody,
-  ModalFooter,
-  Button,
-  Input,
+import { Modal, ModalContent, ModalHeader, ModalBody,ModalFooter,Button,Input,
   Select,
   SelectItem
-} from "@nextui-org/react";
+} from "@nextui-org/react";7
 
-const ModalUsuario = ({isOpen , onClose}) => {
+
+const ModalUsuario = ({isOpen , onClose, fetchUsers}) => {
 
   const [formData, setFormData] = useState({
     nombre: '',
@@ -47,6 +45,7 @@ const ModalUsuario = ({isOpen , onClose}) => {
 
       const result = await res.json();
       console.log('Usuario registrado:', result);
+      fetchUsers();   
       onClose(); // Cerrar modal si el registro fue exitoso
 
 
@@ -55,8 +54,6 @@ const ModalUsuario = ({isOpen , onClose}) => {
       
     }
   }
-
-  console.log(formData)
 
 
   if(!isOpen) return null;

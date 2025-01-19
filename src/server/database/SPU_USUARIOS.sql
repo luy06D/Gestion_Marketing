@@ -13,6 +13,7 @@ DELIMITER ;
 
 CALL spu_listar_user();
 
+
 -- REGISTRO DE USUARIOS 
 DELIMITER //
 CREATE PROCEDURE spu_registro_user

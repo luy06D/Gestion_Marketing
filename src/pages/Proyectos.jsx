@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import {Tabs, Tab, Card, CardBody} from "@heroui/react";
 import {Table,TableHeader,TableColumn, TableBody, TableRow,
-  TableCell,Chip,Tooltip} from "@nextui-org/react";
+  TableCell, Button} from "@nextui-org/react";
+import ModalP from '../components/ModalProjec_add';
+import useFetchProject from '../hooks/useFetchProject';
+
 
 const Proyectos = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const {project, fetchProjects} = useFetchProject();
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
+
+
   return (
     <Container>
       <div className='title-pro'>
@@ -16,31 +27,26 @@ const Proyectos = () => {
         <Tab key="photos" title="Lista de proyectos">
           <Card>
             <CardBody>
-            <Table aria-label="Example static collection table">
+            <div className='btn-new mb-5 mt-2'>
+               <Button onClick={openModal} color='primary' variant='shadow'>Nuevo proyecto</Button>
+               <ModalP isOpen={isModalOpen} onClose={closeModal} />
+            </div>
+            <Table removeWrapper aria-label="Example static collection table">
               <TableHeader columns={columns}>
                       {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
               </TableHeader>
               <TableBody>
-                <TableRow key="1">
-                  <TableCell>Tony Reichert</TableCell>
-                  <TableCell>CEO</TableCell>
-                  <TableCell>Active</TableCell>
-                </TableRow>
-                <TableRow key="2">
-                  <TableCell>Zoey Lang</TableCell>
-                  <TableCell>Technical Lead</TableCell>
-                  <TableCell>Paused</TableCell>
-                </TableRow>
-                <TableRow key="3">
-                  <TableCell>Jane Fisher</TableCell>
-                  <TableCell>Senior Developer</TableCell>
-                  <TableCell>Active</TableCell>
-                </TableRow>
-                <TableRow key="4">
-                  <TableCell>William Howard</TableCell>
-                  <TableCell>Community Manager</TableCell>
-                  <TableCell>Vacation</TableCell>
-                </TableRow>
+                {project.map((item, index) => (
+
+                  <TableRow key={index}>
+                    <TableCell>{item.idproyecto}</TableCell>
+                    <TableCell>{item.cliente}</TableCell>
+                    <TableCell>{item.nombreP}</TableCell>
+                    <TableCell>{item.fecha_inicio}</TableCell>
+                    <TableCell>{item.fecha_fin}</TableCell>
+                    <TableCell>{item.estado_project}</TableCell>
+                  </TableRow>
+                ))}    
               </TableBody>
             </Table>
             </CardBody>
@@ -64,16 +70,28 @@ const Proyectos = () => {
 
 const columns = [
   {
-    key: "idusuario",
+    key: "idproyecto",
     label: "ITEM",
   },
   {
-    key: "usuario",
-    label: "NOMBRE",
+    key: "cliente",
+    label: "CLIENTE",
   },
   {
-    key: "user_name",
-    label: "USUARIO",
+    key: "nombreP",
+    label: "NOMBRE PROYECTO",
+  },
+  {
+    key: "fecha_inicio",
+    label: "FECHA INICIO",
+  },
+  {
+    key: "fecha_fin",
+    label: "FECHA FIN",
+  },
+  {
+    key: "estado_project",
+    label: "ESTADO  ",
   },
 ];
 
@@ -84,6 +102,11 @@ const Container = styled.div`
     margin-top: 20px;
     margin-bottom: 30px;
    // font-weight: bold; 
+  };
+
+  .btn-new{
+    display: 'flex';
+    justify-content: 'flex-start'
   }
 `;
 

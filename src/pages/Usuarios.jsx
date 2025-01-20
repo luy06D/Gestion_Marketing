@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import {Button, user} from "@nextui-org/react";
-import Modal from '../components/ModalUsuario'
+import {Button} from "@nextui-org/react";
+import Modal from '../components/ModalUser_add'
 import {Table,TableHeader,TableColumn, TableBody, TableRow,
   TableCell,Chip,Tooltip} from "@nextui-org/react";
 import useFetchUsers from '../hooks/useFetchUsers';

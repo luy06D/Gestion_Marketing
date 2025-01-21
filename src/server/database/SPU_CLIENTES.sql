@@ -1,5 +1,20 @@
 USE Gestion_mark;
 
+-- FILTRO CLIENTES 
+DELIMITER //
+CREATE PROCEDURE spu_filtro_clientes(IN search VARCHAR(30))
+BEGIN 
+	SELECT idcliente, CONCAT(nombre,' ',apellido) AS cliente,
+			industria, contacto_principal
+	FROM CLIENTES CLI
+	INNER JOIN PERSONAS PER ON CLI.idpersona = PER.idpersona
+    WHERE CONCAT(nombre, ' ', apellido) LIKE CONCAT('%', search ,'%');
+
+END //
+DELIMITER ;
+
+CALL spu_filtro_clientes('luis')
+
 -- REGISTRAR CLIENTES
 DELIMITER 
 CREATE PROCEDURE spu_createClientes 

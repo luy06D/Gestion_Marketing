@@ -67,12 +67,10 @@ const ModalUsuario = ({isOpen , onClose, fetchUsers}) => {
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
             <Input label="Nombres" type="text" name='nombre' value={formData.nombre} onChange={handleChange} />
             <Input label="Apellidos" type="text" name='apellido' value={formData.apellido} onChange={handleChange} />
-          </div>
-          <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
             <Input label="DNI" type="number" name='doc_identidad' value={formData.doc_identidad} onChange={handleChange}/>
-            <Input label="Correo" type="email" name='email' value={formData.email} onChange={handleChange} />
           </div>
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+            <Input label="Correo" type="email" name='email' value={formData.email} onChange={handleChange} />
             <Input label="Usuario" type="text" name='user_name' value={formData.user_name} onChange={handleChange}/>
             <Input label="Contraseña" type="password" name='password_usu' value={formData.password_usu} onChange={handleChange} />
           </div>
@@ -83,8 +81,6 @@ const ModalUsuario = ({isOpen , onClose, fetchUsers}) => {
               <SelectItem key={access.key}>{access.label}</SelectItem>
             ))}
           </Select>
-          </div>
-          <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
           <Select className="max-w-xs" label="Rol" name='rol'
           onChange={(e) => setFormData({...formData, rol: e.target.value})}>
             {roles.map((rol) => (

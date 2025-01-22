@@ -1,4 +1,3 @@
-import { fieldset } from 'framer-motion/client';
 import {Model, DataTypes} from 'sequelize';
 
 const CLIENT_TABLE = 'CLIENTES'

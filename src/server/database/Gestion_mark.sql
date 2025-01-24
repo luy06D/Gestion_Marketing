@@ -29,7 +29,7 @@ CREATE TABLE CLIENTES (
 );
 
 INSERT INTO CLIENTES (idpersona, industria, contacto_principal) VALUES
-				(4, 'Tecnologia y Software', 925698523);
+				(3, 'Productos lacteos', 965856325);
 
 
 CREATE TABLE USUARIOS (	

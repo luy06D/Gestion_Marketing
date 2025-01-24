@@ -5,7 +5,7 @@ const service = new ClientesService();
 const filterClient = async (req, res) =>{
     try {
         const {search} = req.query;
-        const response = await service.filterClient(search);
+        const response = await service.listarClient(search);
         res.json(response);
     } catch (err) {
         res.status(500).send({success: false, message: err.message});
@@ -14,4 +14,4 @@ const filterClient = async (req, res) =>{
 }
 
 
-export default {filterClient}
+export default {filterClient}                   

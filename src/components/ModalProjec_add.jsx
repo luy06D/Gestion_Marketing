@@ -37,8 +37,8 @@ const ModalProyecto = ({isOpen, onClose}) => {
     idcliente: '',
     nombreP: '',
     descripcion: '',
-    fecha_inicio: '',
-    fecha_fin:''
+    fecha_inicio: null,
+    fecha_fin: null
   });
 
   const handleChange = (e) =>{
@@ -50,15 +50,42 @@ const ModalProyecto = ({isOpen, onClose}) => {
     })
   };
 
-  console.log(dataClient)
+  //MANEJO DE DATOS DATE 
+  const handleDateChange = (name, date) => {
+    setFormData({
+      ...formData,
+      fecha_inicio: formData.fecha_inicio ? formData.fecha_inicio.toISOString().split('T')[0] : '',
+      fecha_fin: formData.fecha_fin ? formData.fecha_fin.toISOString().split('T')[0] : ''
+    });
+  };
 
 
+  const handleSumit = async () => {
+    try {
+      const res = await fetch('http://localhost:3000/api/v1/proyecto',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
 
-  
-  
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || 'Error al registrar el proyecto.');
+      }
 
+      const result = await res.json();
+      console.log('Usuario registrado: ', result)
+      
+    } catch (error) {
+      console.log('Error de registro: ', error.message);
+      
+    }
+  }
 
-  
+  console.log(formData)
+
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size='2xl'>
@@ -81,21 +108,21 @@ const ModalProyecto = ({isOpen, onClose}) => {
             <Divider/>
             <TextS>Datos del proyectos</TextS>
            <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-             <Input label="Nombre del Proyecto" type="text" name='nombreP' value={formData.nombreP} />
+             <Input label="Nombre del Proyecto" type="text" name='nombreP' value={formData.nombreP} onChange={handleChange} />
            </div>
            <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-            <Textarea className="max-w-xs" label="Descripción" name='descripcion' value={formData.descripcion}  />
+            <Textarea className="max-w-xs" label="Descripción" name='descripcion' value={formData.descripcion} onChange={handleChange}  />
            </div>
            <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-            <DatePicker className="max-w-[284px]" label="Fecha Inicio" name='fecha_inicio' value={formData.fecha_inicio} />
-            <DatePicker className="max-w-[284px]" label="Fecha Fin" name='fecha_fin' value={formData.fecha_fin} />
+            <DatePicker className="max-w-[284px]" label="Fecha Inicio" name='fecha_inicio' value={formData.fecha_inicio} onChange={(date) => handleDateChange('fecha_inicio', date)} />
+            <DatePicker className="max-w-[284px]" label="Fecha Fin" name='fecha_fin' value={formData.fecha_fin} onChange={(date) => handleDateChange('fecha_fin', date)} />
            </div>
           </ModalBody>
           <ModalFooter>
             <Button color="danger" variant="shadow" onPress={onClose}>
               Cerrar
             </Button>
-            <Button color="primary" variant='shadow' onPress={onClose}>
+            <Button color="primary" variant='shadow' onPress={handleSumit}>
               Registrar
             </Button>
           </ModalFooter>

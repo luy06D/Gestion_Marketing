@@ -2,8 +2,8 @@
 
 El proyecto de gestión de proyectos está actualmente en proceso de desarrollo utilizando las siguientes tecnologías:
 
-- **React** ![React](https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg) 
-- **Node.js** ![Node.js](https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg)
+- **React** <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="20" height="20"/> 
+- **Node.js** <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="20" height="20"/>
 
 
 ## Tecnologías utilizadas:

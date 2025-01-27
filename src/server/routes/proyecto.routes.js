@@ -3,6 +3,7 @@ import proyectoControllers from '../controllers/proyectos.controllers.js';
 const router = express.Router();
 
 router
-    .get('/', proyectoControllers.getProjects);
+    .get('/', proyectoControllers.getProjects)
+    .post('/', proyectoControllers.createProyect);
 
 export default router; 

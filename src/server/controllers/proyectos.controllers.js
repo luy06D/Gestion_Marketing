@@ -13,4 +13,18 @@ const getProjects = async (req, res) => {
     }
 }
 
-export default {getProjects}
+// REGISTRAR PROYECTOS
+const createProyect = async (req, res) =>{
+    try {
+        const proyectData = req.body;
+        const response = await service.registrarProyect(proyectData);
+
+        res.status(201).json({success: true, data: response})
+
+    } catch (error) {
+        res.status(500).send({success: false, message: error.message})
+        
+    }
+}
+
+export default {getProjects, createProyect}

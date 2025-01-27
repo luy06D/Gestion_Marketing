@@ -31,7 +31,6 @@ CREATE TABLE CLIENTES (
 INSERT INTO CLIENTES (idpersona, industria, contacto_principal) VALUES
 				(3, 'Productos lacteos', 965856325);
 
-
 CREATE TABLE USUARIOS (	
 	idusuario INT AUTO_INCREMENT PRIMARY KEY,
     idpersona INT NOT NULL,

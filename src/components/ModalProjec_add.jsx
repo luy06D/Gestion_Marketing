@@ -4,6 +4,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody,ModalFooter,Button,Input,
   } from "@nextui-org/react";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import styled from 'styled-components';
+import {format} from 'date-fns'
 
 
 const ModalProyecto = ({isOpen, onClose}) => {
@@ -38,7 +39,7 @@ const ModalProyecto = ({isOpen, onClose}) => {
     nombreP: '',
     descripcion: '',
     fecha_inicio: null,
-    fecha_fin: null
+    fecha_fin: null,
   });
 
   const handleChange = (e) =>{
@@ -54,8 +55,8 @@ const ModalProyecto = ({isOpen, onClose}) => {
   const handleDateChange = (name, date) => {
     setFormData({
       ...formData,
-      fecha_inicio: formData.fecha_inicio ? formData.fecha_inicio.toISOString().split('T')[0] : '',
-      fecha_fin: formData.fecha_fin ? formData.fecha_fin.toISOString().split('T')[0] : ''
+      [name]: date ? format(date, 'yyyy-MM-dd') : '', 
+
     });
   };
 
@@ -114,8 +115,19 @@ const ModalProyecto = ({isOpen, onClose}) => {
             <Textarea className="max-w-xs" label="Descripción" name='descripcion' value={formData.descripcion} onChange={handleChange}  />
            </div>
            <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-            <DatePicker className="max-w-[284px]" label="Fecha Inicio" name='fecha_inicio' value={formData.fecha_inicio} onChange={(date) => handleDateChange('fecha_inicio', date)} />
-            <DatePicker className="max-w-[284px]" label="Fecha Fin" name='fecha_fin' value={formData.fecha_fin} onChange={(date) => handleDateChange('fecha_fin', date)} />
+            <DatePicker 
+            className="max-w-[284px]" 
+            label="Fecha Inicio" 
+            name='fecha_inicio' 
+            value={formData.fecha_inicio ? new Date(formData.fecha_inicio) : null } 
+            onChange={(date) => handleDateChange('fecha_inicio', date)} />
+
+            <DatePicker 
+            className="max-w-[284px]" 
+            label="Fecha Fin" 
+            name='fecha_fin' 
+            value={formData.fecha_fin ? new Date(formData.fecha_fin) : null} 
+            onChange={(date) => handleDateChange('fecha_fin', date)} />
            </div>
           </ModalBody>
           <ModalFooter>

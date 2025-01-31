@@ -4,6 +4,7 @@ import {Tabs, Tab, Card, CardBody} from "@heroui/react";
 import {Table,TableHeader,TableColumn, TableBody, TableRow,
   TableCell, Button, Tooltip, Chip} from "@nextui-org/react";
 import ModalP from '../components/ModalProjec_add';
+import ModalDetalleP from '../components/ModalDetalleProject'
 import useFetchProject from '../hooks/useFetchProject';
 import DeleteIcon from '../icons/DeleteIcon'
 import EditIcon from '../icons/EditIcon';
@@ -11,11 +12,16 @@ import EyeIcon from '../icons/EyeIcon';
 
 const Proyectos = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalDetOpen , setModalDetOpen] = useState(false);
   const {project, fetchProjects} = useFetchProject();
 
+  // CAMBIO DE ESTADOS PARA MODAL REGISTRO
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
+  // CAMBIO DE ESTADOS PARA MODAL DETALLE DE PROYECTOS
+  const openModalP = () => setModalDetOpen(true);
+  const closeModalP = () => setModalDetOpen(false);
 
 
   return (
@@ -26,7 +32,7 @@ const Proyectos = () => {
 
       <div className="flex w-full flex-col">
       <Tabs aria-label="Options" color="secondary" variant="light" >
-        <Tab key="photos" title="Lista de proyectos">
+        <Tab key="photos" title="PROYECTOS">
           <Card>
             <CardBody>
             <div className='btn-new mb-5 mt-2'>
@@ -52,7 +58,8 @@ const Proyectos = () => {
                     <TableCell className='relative flex items-center gap-2'>
                       <Tooltip content="Detalles" color='success'>
                         <span className="text-lg text-default-400 text-success cursor-pointer active:opacity-50">
-                          <EyeIcon />
+                          <EyeIcon onClick={openModalP}/>
+                          <ModalDetalleP isOpen={isModalDetOpen} onClose={closeModalP}/>
                         </span>
                       </Tooltip>
                       <Tooltip content="Editar" color='warning'>
@@ -130,8 +137,8 @@ const Container = styled.div`
   };
 
   .btn-new{
-    display: 'flex';
-    justify-content: 'flex-start'
+    display: flex;
+    justify-content: flex-end
   }
 `;
 

@@ -9,6 +9,7 @@ import {format} from 'date-fns'
 
 const ModalProyecto = ({isOpen, onClose}) => {
 
+
   const [search , setSearch] = useState("");
   const [dataClient , setDataClient]  = useState({});
 
@@ -55,20 +56,74 @@ const ModalProyecto = ({isOpen, onClose}) => {
   const handleDateChange = (name, date) => {
     setFormData({
       ...formData,
-      [name]: date ? format(date, 'yyyy-MM-dd') : '', 
-
+      [name]: date,
     });
   };
-
+  
+  const handlePrueba = () => {
+    // 🔹 Verifica que formData tenga los valores correctos antes de enviarlos
+    console.log("Datos antes de enviar:", formData);
+  
+    const { idcliente, nombreP, descripcion, fecha_inicio, fecha_fin } = formData;
+  
+    if (!idcliente || !nombreP || !descripcion || !fecha_inicio || !fecha_fin) {
+      alert("Por favor, completa todos los campos.");
+      return;
+    }
+  
+    // 🔹 Formatea las fechas antes de enviar
+    const formatFecha = (fecha) => {
+      if (!fecha) return null;
+      return format(new Date(fecha.year, fecha.month - 1, fecha.day), "yyyy-MM-dd");
+    };
+  
+    const formattedData = {
+      idcliente,
+      nombreP,
+      descripcion,
+      fecha_inicio: formatFecha(fecha_inicio),
+      fecha_fin: formatFecha(fecha_fin),
+    };
+  
+    console.log("Datos formateados:", formattedData);
+  
+  };
+  
 
   const handleSumit = async () => {
+
+    const { idcliente, nombreP, descripcion, fecha_inicio, fecha_fin } = formData;
+  
+    if (!idcliente || !nombreP || !descripcion || !fecha_inicio || !fecha_fin) {
+      alert("Por favor, completa todos los campos.");
+      return;
+    }
+  
+    // 🔹 Formatea las fechas antes de enviar
+    const formatFecha = (fecha) => {
+      if (!fecha) return null;
+      return format(new Date(fecha.year, fecha.month - 1, fecha.day), "yyyy-MM-dd");
+    };
+  
+    const formattedData = {
+      idcliente,
+      nombreP,
+      descripcion,
+      fecha_inicio: formatFecha(fecha_inicio),
+      fecha_fin: formatFecha(fecha_fin),
+    };
+  
+    console.log("Datos formateados:", formattedData);
+
+
+
     try {
       const res = await fetch('http://localhost:3000/api/v1/proyecto',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formattedData)
       });
 
       if (!res.ok) {
@@ -77,7 +132,7 @@ const ModalProyecto = ({isOpen, onClose}) => {
       }
 
       const result = await res.json();
-      console.log('Usuario registrado: ', result)
+      console.log('Proyecto registrado: ', result)
       
     } catch (error) {
       console.log('Error de registro: ', error.message);
@@ -85,7 +140,6 @@ const ModalProyecto = ({isOpen, onClose}) => {
     }
   }
 
-  console.log(formData)
 
 
   return (
@@ -98,7 +152,7 @@ const ModalProyecto = ({isOpen, onClose}) => {
             <TextS>Datos del cliente</TextS>
            <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
              <Input label="Ingrese el nombre del cliente" type="text" name='cliente' onChange={handleInputChange} />
-             <Button color='secondary' onClick={handleSearch}><HiMiniMagnifyingGlass size={18}/></Button>
+             <Button color='secondary' onPress={handleSearch}><HiMiniMagnifyingGlass size={18}/></Button>
            </div>
            <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
              <Input label="Nombre completo" type="text" name='cliente' value={dataClient?.cliente} disabled />
@@ -119,14 +173,16 @@ const ModalProyecto = ({isOpen, onClose}) => {
             className="max-w-[284px]" 
             label="Fecha Inicio" 
             name='fecha_inicio' 
-            value={formData.fecha_inicio ? new Date(formData.fecha_inicio) : null } 
+            dateFormat='dd/MM/yyyy'
+            value={formData.fecha_inicio} 
             onChange={(date) => handleDateChange('fecha_inicio', date)} />
 
             <DatePicker 
             className="max-w-[284px]" 
             label="Fecha Fin" 
             name='fecha_fin' 
-            value={formData.fecha_fin ? new Date(formData.fecha_fin) : null} 
+            dateFormat='dd/MM/yyyy'
+            value={formData.fecha_fin}
             onChange={(date) => handleDateChange('fecha_fin', date)} />
            </div>
           </ModalBody>

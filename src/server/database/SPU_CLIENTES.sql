@@ -13,10 +13,10 @@ BEGIN
 END //
 DELIMITER ;
 
-CALL spu_filtro_clientes('luis')
+CALL spu_filtro_clientes('juan')
 
 -- REGISTRAR CLIENTES
-DELIMITER 
+DELIMITER //	
 CREATE PROCEDURE spu_createClientes 
 (
 IN _nombre VARCHAR(30),
@@ -35,8 +35,11 @@ INSERT INTO PERSONAS (nombre, apellido, doc_identidad, email)
     SET _idpersona = LAST_INSERT_ID();
     
     INSERT INTO CLIENTES (idpersona , industria, contacto_principal)
-			VALUES (_idpersona, _industria, _contacto_principal)
+			VALUES (_idpersona, _industria, _contacto_principal);
 END //
 DELIMITER ;
+
+CALL spu_createClientes('Juan', 'Pérez', '12345678', 'juan.perez@example.com', 'Tecnología', '987654321');
+
 
 

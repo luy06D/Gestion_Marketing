@@ -60,34 +60,6 @@ const ModalProyecto = ({isOpen, onClose}) => {
     });
   };
   
-  const handlePrueba = () => {
-    // 🔹 Verifica que formData tenga los valores correctos antes de enviarlos
-    console.log("Datos antes de enviar:", formData);
-  
-    const { idcliente, nombreP, descripcion, fecha_inicio, fecha_fin } = formData;
-  
-    if (!idcliente || !nombreP || !descripcion || !fecha_inicio || !fecha_fin) {
-      alert("Por favor, completa todos los campos.");
-      return;
-    }
-  
-    // 🔹 Formatea las fechas antes de enviar
-    const formatFecha = (fecha) => {
-      if (!fecha) return null;
-      return format(new Date(fecha.year, fecha.month - 1, fecha.day), "yyyy-MM-dd");
-    };
-  
-    const formattedData = {
-      idcliente,
-      nombreP,
-      descripcion,
-      fecha_inicio: formatFecha(fecha_inicio),
-      fecha_fin: formatFecha(fecha_fin),
-    };
-  
-    console.log("Datos formateados:", formattedData);
-  
-  };
   
 
   const handleSumit = async () => {
@@ -99,18 +71,12 @@ const ModalProyecto = ({isOpen, onClose}) => {
       return;
     }
   
-    // 🔹 Formatea las fechas antes de enviar
-    const formatFecha = (fecha) => {
-      if (!fecha) return null;
-      return format(new Date(fecha.year, fecha.month - 1, fecha.day), "yyyy-MM-dd");
-    };
-  
     const formattedData = {
       idcliente,
       nombreP,
       descripcion,
-      fecha_inicio: formatFecha(fecha_inicio),
-      fecha_fin: formatFecha(fecha_fin),
+      fecha_inicio: format(fecha_inicio, "yyyy-MM-dd"),
+      fecha_fin: format(fecha_fin, "yyyy-MM-dd"),
     };
   
     console.log("Datos formateados:", formattedData);

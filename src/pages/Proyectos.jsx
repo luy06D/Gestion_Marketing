@@ -9,6 +9,8 @@ import useFetchProject from '../hooks/useFetchProject';
 import DeleteIcon from '../icons/DeleteIcon'
 import EditIcon from '../icons/EditIcon';
 import EyeIcon from '../icons/EyeIcon';
+import { BsFileEarmarkPdf } from "react-icons/bs";
+import { RiFileExcel2Line } from "react-icons/ri";
 
 const Proyectos = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -36,7 +38,9 @@ const Proyectos = () => {
           <Card>
             <CardBody>
             <div className='btn-new mb-5 mt-2'>
-               <Button onClick={openModal} color='primary' variant='shadow'>Nuevo proyecto</Button>
+               <Button onPress={openModal} color='primary' variant='shadow'>Nuevo proyecto</Button>
+               <Button  color='danger' variant='shadow'><BsFileEarmarkPdf/></Button>
+               <Button  color='success' variant='shadow'><RiFileExcel2Line/></Button>
                <ModalP isOpen={isModalOpen} onClose={closeModal} />
             </div>
             <Table removeWrapper aria-label="Example static collection table">
@@ -138,7 +142,8 @@ const Container = styled.div`
 
   .btn-new{
     display: flex;
-    justify-content: flex-end
+    justify-content: flex-start;
+    gap: 5px;
   }
 `;
 

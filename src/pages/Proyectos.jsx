@@ -57,7 +57,7 @@ const Proyectos = () => {
                     <TableCell>{item.fecha_inicio}</TableCell>
                     <TableCell>{item.fecha_fin}</TableCell>
                     <TableCell>
-                      <Chip color='success' variant='shadow'>{item.estado_project}</Chip>
+                      <Chip color='danger' variant='shadow'>{item.estado_project}</Chip>
                     </TableCell>
                     <TableCell className='relative flex items-center gap-2'>
                       <Tooltip content="Detalles" color='success'>

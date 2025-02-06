@@ -5,6 +5,8 @@ import { Modal, ModalContent, ModalHeader, ModalBody,ModalFooter,Button,Input,
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import styled from 'styled-components';
 import {format} from 'date-fns'
+import Swal from 'sweetalert2'
+
 
 
 const ModalProyecto = ({isOpen, onClose}) => {
@@ -99,6 +101,15 @@ const ModalProyecto = ({isOpen, onClose}) => {
 
       const result = await res.json();
       console.log('Proyecto registrado: ', result)
+      onClose();
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500
+      });
+
       
     } catch (error) {
       console.log('Error de registro: ', error.message);
@@ -111,6 +122,7 @@ const ModalProyecto = ({isOpen, onClose}) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size='2xl'>
     <ModalContent>
+
       {(onClose) => (
         <>
           <ModalHeader className="flex flex-col gap-1">REGISTRO DE PROYECTOS</ModalHeader>
@@ -156,7 +168,7 @@ const ModalProyecto = ({isOpen, onClose}) => {
             <Button color="danger" variant="shadow" onPress={onClose}>
               Cerrar
             </Button>
-            <Button color="primary" variant='shadow' onPress={handleSumit}>
+            <Button color="primary" variant='shadow' onPress={handleSumit} >
               Registrar
             </Button>
           </ModalFooter>

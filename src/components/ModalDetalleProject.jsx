@@ -1,27 +1,90 @@
 // ESTO ES UN SNIPPETS 
 import React from 'react'
 import { Modal, ModalContent, ModalHeader, ModalBody,ModalFooter,
-    Button, Divider, Input} from "@nextui-org/react";
+    Button, Divider, Input, Textarea, User, Card, CardHeader, CardBody, CardFooter,
+   Link, Image} from "@nextui-org/react";
+import styled from 'styled-components';
 
 const ModalDetalleP = ({isOpen , onClose}) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size='5xl'>
+    <Modal isOpen={isOpen} onClose={onClose} size='lg' >
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-center mb-4">NOMBRE DEL PROYECTO</ModalHeader>
               <ModalBody>
-                <div className="flex h-5 items-center justify-center gap-x-40 text-small">
-                    <div className="flex flex-col items-center">
-                        <div className='mb-4 mt-3'>DETALLES DEL PROYECTO</div>
-                        <Input label="Fecha Inicio" type="text" name='cliente' />
+              <TextS>Detalles del cliente</TextS>
+              <div className="flex w-full flex-wrap md:flex-nowrap gap-4">       
+                <Input key='outside-left' label="Fecha Ini. : " labelPlacement='outside-left' type="text"/>
+                <Input key='outside-left' label="Fecha Fin :" labelPlacement='outside-left' type="text"/>
+              </div>
+              <Input key='outside-left' label="Cliente :" labelPlacement='outside-left' type="text"/>
+              <Textarea label="Descrip : " labelPlacement= 'outside-left' type="text" />
+              <Divider className='mt-3'/>
+              <TextS>Equipo acargo</TextS>
+              <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mt-2">       
+              <User
+                avatarProps={{
+                  src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+                }}
+                description="Product Designer"
+                name="Jane Doe"
+                />
+                <User
+                avatarProps={{
+                  src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+                }}
+                description="Product Designer"
+                name="Jane Doe"
+                />
+                <User
+                avatarProps={{
+                  src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+                }}
+                description="Product Designer"
+                name="Jane Doe"
+                />
+              </div>
+              <Divider className='mt-3'/>
+              <TextS>Tareas Asignadas</TextS>
+              <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mt-2">
+                <Card className="max-w-[200px]">
+                  <CardHeader className="flex gap-3">
+                    <Image alt="heroui logo" height={40} radius="sm"
+                      src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                      width={40}
+                    />
+                    <div className="flex flex-col">
+                      <p className="text-md">HeroUI</p>
+                      <p className="text-small text-default-500">heroui.com</p>
                     </div>
-                    <Divider orientation="vertical" />
-                    <div className="flex flex-col items-center">
-                        <div className='mb-4 mt-3'>TAREAS ASIGNADAS</div>
-                        <p className="text-gray-600 text-xs">Texto debajo de tareas</p>
+                  </CardHeader>
+                  <Divider />
+                  <CardBody>
+                    <p className='text-small'>Make beautiful websites regardless of your design experience.</p>
+                  </CardBody>    
+                </Card>
+                 <Card className="max-w-[200px]">
+                  <CardHeader className="flex gap-3">
+                    <Image alt="heroui logo" height={40} radius="sm"
+                      src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                      width={40}
+                    />
+                    <div className="flex flex-col">
+                      <p className="text-md">HeroUI</p>
+                      <p className="text-small text-default-500">heroui.com</p>
                     </div>
-                </div>
+                  </CardHeader>
+                  <Divider />
+                  <CardBody>
+                    <p className='text-small'>Make beautiful websites regardless of your design experience.</p>
+                  </CardBody>    
+                </Card>
+
+              </div>
+
+
+            
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
@@ -38,5 +101,12 @@ const ModalDetalleP = ({isOpen , onClose}) => {
     
   )
 }
+
+const TextS = styled.p`
+  color: #535353;
+  font-size: 14px;
+`;
+
+
 
 export default ModalDetalleP

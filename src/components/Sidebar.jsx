@@ -11,6 +11,7 @@ import { AiOutlineLeft ,
   AiOutlineUser,
   AiOutlineFilePdf   } from "react-icons/ai";
 import { NavLink } from 'react-router-dom';
+import {Tooltip} from "@heroui/react";
 import {Divider} from "@nextui-org/divider";
 import {Switch} from "@nextui-org/react";
 import { ThemeContext } from '../App';
@@ -47,6 +48,7 @@ const changeTheme =()=>{
       {linksArray.map(({icon, label,  to})=>(
 
         <div className='LinkContainer' key={label}>
+          <Tooltip content={label} placement='right'> 
           <NavLink to={to} className={({isActive})=>`Links ${isActive?`active`: ``}` }  >
             <div className='LinkIcon'>
               {icon}
@@ -55,6 +57,7 @@ const changeTheme =()=>{
             }
             
           </NavLink>
+          </Tooltip>
         </div>
       ))}
 

@@ -41,8 +41,6 @@ CALL spu_registrar_proyecto (
 );
 
 
-
-
 select * from proyectos;
 
 

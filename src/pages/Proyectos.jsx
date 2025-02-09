@@ -28,7 +28,13 @@ const Proyectos = () => {
 
 
   return (
+
+    
     <Container>
+      
+       <ModalP isOpen={isModalOpen} onClose={closeModal} fetchProjects={fetchProjects} />
+       <ModalDetalleP isOpen={isModalDetOpen} onClose={closeModalP}/>
+
       <div className='title-pro'>
         <h1>GESTION DE PROYECTO</h1>
       </div>
@@ -42,7 +48,6 @@ const Proyectos = () => {
                <Button onPress={openModal} color='primary' variant='shadow'>Nuevo proyecto</Button>
                <Button color='danger' variant='shadow'><BsFileEarmarkPdf/></Button>
                <Button  color='success' variant='shadow'><RiFileExcel2Line/></Button>
-               <ModalP isOpen={isModalOpen} onClose={closeModal} fetchProjects={fetchProjects} />
             </div>
             <Table removeWrapper aria-label="Example static collection table">
               <TableHeader columns={columns}>
@@ -64,7 +69,6 @@ const Proyectos = () => {
                       <Tooltip content="Detalles" color='success'>
                         <span className="text-lg text-default-400 text-success cursor-pointer active:opacity-50">
                           <EyeIcon onClick={openModalP}/>
-                          <ModalDetalleP isOpen={isModalDetOpen} onClose={closeModalP}/>
                         </span>
                       </Tooltip>
                       <Tooltip content="Editar" color='warning'>

@@ -5,6 +5,7 @@ import {BrowserRouter} from 'react-router-dom'
 import Sidebar from "./components/Sidebar";
 import React, { useState } from "react";
 import { Light, Dark } from './styles/Themes';
+import 'izitoast/dist/css/iziToast.min.css';
 
 export const ThemeContext = React.createContext(null);
 

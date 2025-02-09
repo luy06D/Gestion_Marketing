@@ -5,11 +5,11 @@ import { Modal, ModalContent, ModalHeader, ModalBody,ModalFooter,Button,Input,
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import styled from 'styled-components';
 import {format} from 'date-fns'
-import Swal from 'sweetalert2'
+import { showSuccess } from '../utils/toastUtils';
 
 
 
-const ModalProyecto = ({isOpen, onClose}) => {
+const ModalProyecto = ({isOpen, onClose, fetchProjects}) => {
 
 
   const [search , setSearch] = useState("");
@@ -81,8 +81,6 @@ const ModalProyecto = ({isOpen, onClose}) => {
       fecha_fin: format(fecha_fin, "yyyy-MM-dd"),
     };
   
-    console.log("Datos formateados:", formattedData);
-
 
 
     try {
@@ -100,15 +98,12 @@ const ModalProyecto = ({isOpen, onClose}) => {
       }
 
       const result = await res.json();
-      console.log('Proyecto registrado: ', result)
+      //Renderiza la lista de proyectos
+      fetchProjects();
+      //Cierra el modal
       onClose();
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Your work has been saved",
-        showConfirmButton: false,
-        timer: 1500
-      });
+      showSuccess("PROYECTOS |");
+      
 
       
     } catch (error) {
@@ -116,6 +111,8 @@ const ModalProyecto = ({isOpen, onClose}) => {
       
     }
   }
+
+
 
 
 

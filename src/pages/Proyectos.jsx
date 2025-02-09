@@ -12,6 +12,7 @@ import EyeIcon from '../icons/EyeIcon';
 import { BsFileEarmarkPdf } from "react-icons/bs";
 import { RiFileExcel2Line } from "react-icons/ri";
 
+
 const Proyectos = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModalDetOpen , setModalDetOpen] = useState(false);
@@ -39,9 +40,9 @@ const Proyectos = () => {
             <CardBody>
             <div className='btn-new mb-5 mt-2'>
                <Button onPress={openModal} color='primary' variant='shadow'>Nuevo proyecto</Button>
-               <Button  color='danger' variant='shadow'><BsFileEarmarkPdf/></Button>
+               <Button color='danger' variant='shadow'><BsFileEarmarkPdf/></Button>
                <Button  color='success' variant='shadow'><RiFileExcel2Line/></Button>
-               <ModalP isOpen={isModalOpen} onClose={closeModal} />
+               <ModalP isOpen={isModalOpen} onClose={closeModal} fetchProjects={fetchProjects} />
             </div>
             <Table removeWrapper aria-label="Example static collection table">
               <TableHeader columns={columns}>

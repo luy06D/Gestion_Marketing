@@ -39,7 +39,6 @@ INSERT INTO PERSONAS (nombre, apellido, doc_identidad, email)
 END //
 DELIMITER ;
 
-CALL spu_createClientes('Juan', 'Pérez', '12345678', 'juan.perez@example.com', 'Tecnología', '987654321');
-
+CALL spu_createClientes('Lidia', 'Cusi Gonzales', '69587536', 'lidia_12@gmail.com', 'Costura', '985685247');
 
 

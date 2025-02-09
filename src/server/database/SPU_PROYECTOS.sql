@@ -39,3 +39,14 @@ CALL spu_registrar_proyecto (
     '2025-01-22',
     '2025-03-01'
 );
+
+
+
+
+select * from proyectos;
+
+
+
+delete from proyectos
+where idproyecto in (10,9)
+

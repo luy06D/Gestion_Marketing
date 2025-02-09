@@ -24,7 +24,7 @@ const Usuarios = () => {
       <div className='title-usu'>
         <h1>USUARIOS</h1>
       </div>
-      <Button onClick={openModal} color='primary' variant='shadow' className='mb-2'>Nuevo usuario</Button>
+      <Button onPress={openModal} color='primary' variant='shadow' className='mb-2'>Nuevo usuario</Button>
       <Modal isOpen={isModalOpen} onClose={closeModal} fetchUsers={fetchUsers} />
       <Table aria-label="Example table with dynamic content">
       <TableHeader columns={columns}>

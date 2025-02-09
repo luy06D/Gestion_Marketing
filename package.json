@@ -22,6 +22,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "framer-motion": "^11.2.10",
+    "izitoast": "^1.4.0",
     "just-debounce-it": "3.2.0",
     "mysql2": "^3.11.5",
     "nodemon": "^3.1.9",

@@ -15,6 +15,19 @@ DELIMITER ;
 
 CALL spu_listar_proyectos();
 
+-- DETALLES DEL PROYECTO
+DELIMITER // 
+CREATE PROCEDURE spu_getDetalles(IN _idproyecto INT)
+BEGIN 
+	SELECT  fecha_inicio, fecha_fin , CONCAT(nombre, ' ', apellido) AS cliente,
+			descripcion
+    FROM PROYECTOS PRO
+    INNER JOIN CLIENTES CLI ON PRO.idcliente = CLI.idcliente
+    INNER JOIN PERSONAS PER ON CLI.idpersona  = PER.idpersona;
+
+END //
+DELIMITER ; 
+
 -- RESGISTRAR PROYECTOS
 DELIMITER //
 CREATE PROCEDURE spu_registrar_proyecto

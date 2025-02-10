@@ -7,7 +7,11 @@ import styled from 'styled-components';
 
 const ModalDetalleP = ({isOpen , onClose}) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size='lg' >
+    <Modal isOpen={isOpen} onClose={onClose} size='lg' scrollBehavior='inside'
+    backdrop="opaque"
+    classNames={{
+      backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20",
+    }}>
         <ModalContent>
           {(onClose) => (
             <>
@@ -87,11 +91,11 @@ const ModalDetalleP = ({isOpen , onClose}) => {
             
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
+                <Button color="danger" variant="shadow" onPress={onClose}>
+                  Cerrar
                 </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
+                <Button color="success" variant='shadow' onPress={onClose}>
+                  Iniciar
                 </Button>
               </ModalFooter>
             </>

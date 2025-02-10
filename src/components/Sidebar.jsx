@@ -48,7 +48,7 @@ const changeTheme =()=>{
       {linksArray.map(({icon, label,  to})=>(
 
         <div className='LinkContainer' key={label}>
-          <Tooltip content={label} placement='right'> 
+          <Tooltip content={label} placement='right' color='secondary'> 
           <NavLink to={to} className={({isActive})=>`Links ${isActive?`active`: ``}` }  >
             <div className='LinkIcon'>
               {icon}

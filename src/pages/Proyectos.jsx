@@ -11,6 +11,7 @@ import EditIcon from '../icons/EditIcon';
 import EyeIcon from '../icons/EyeIcon';
 import { BsFileEarmarkPdf } from "react-icons/bs";
 import { RiFileExcel2Line } from "react-icons/ri";
+import { showError, showWarning } from '../utils/toastUtils';
 
 
 const Proyectos = () => {
@@ -25,6 +26,15 @@ const Proyectos = () => {
   // CAMBIO DE ESTADOS PARA MODAL DETALLE DE PROYECTOS
   const openModalP = () => setModalDetOpen(true);
   const closeModalP = () => setModalDetOpen(false);
+
+  const handlePrueba = () =>{
+    showError("PROYECTOS")
+  }
+
+  const handlePrueba2 = () =>{
+    showWarning("PROYECTOS")
+  }
+
 
 
   return (
@@ -46,8 +56,8 @@ const Proyectos = () => {
             <CardBody>
             <div className='btn-new mb-5 mt-2'>
                <Button onPress={openModal} color='primary' variant='shadow'>Nuevo proyecto</Button>
-               <Button color='danger' variant='shadow'><BsFileEarmarkPdf/></Button>
-               <Button  color='success' variant='shadow'><RiFileExcel2Line/></Button>
+               <Button onPress={handlePrueba} color='danger' variant='shadow'><BsFileEarmarkPdf/></Button>
+               <Button onPress={handlePrueba2} color='success' variant='shadow'><RiFileExcel2Line/></Button>
             </div>
             <Table removeWrapper aria-label="Example static collection table">
               <TableHeader columns={columns}>

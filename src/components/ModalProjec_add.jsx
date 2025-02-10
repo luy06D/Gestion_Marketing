@@ -5,7 +5,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody,ModalFooter,Button,Input,
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import styled from 'styled-components';
 import {format} from 'date-fns'
-import { showSuccess } from '../utils/toastUtils';
+import { showSuccess, showError, showWarning } from '../utils/toastUtils';
 
 
 
@@ -69,7 +69,7 @@ const ModalProyecto = ({isOpen, onClose, fetchProjects}) => {
     const { idcliente, nombreP, descripcion, fecha_inicio, fecha_fin } = formData;
   
     if (!idcliente || !nombreP || !descripcion || !fecha_inicio || !fecha_fin) {
-      alert("Por favor, completa todos los campos.");
+      showWarning("PROYECTOS ")
       return;
     }
   
@@ -117,7 +117,11 @@ const ModalProyecto = ({isOpen, onClose, fetchProjects}) => {
 
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size='2xl'>
+    <Modal isOpen={isOpen} onClose={onClose} size='2xl'
+    backdrop="opaque"
+    classNames={{
+      backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20",
+    }}>
     <ModalContent>
 
       {(onClose) => (

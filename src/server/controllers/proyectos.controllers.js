@@ -13,6 +13,20 @@ const getProjects = async (req, res) => {
     }
 }
 
+
+// LIST PROJECTS DETAILS
+
+const getDetailsP = async(rep, res) =>{
+    try {
+        const { idproyecto }  = req.body;
+        const response = await service.getDetailsProjects(idproyecto);
+        res.json(response);
+        
+    } catch (error) {
+        res.status(500).send({success: false , message: err.message})
+    } 
+}
+
 // REGISTRAR PROYECTOS
 const createProyect = async (req, res) =>{
     try {

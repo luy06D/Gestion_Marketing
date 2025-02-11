@@ -10,6 +10,16 @@ class ProyectoService{
         return result;
     }
 
+    // GET PROJECTS DETAILS
+    async getDetailsProjects(idproyecto){
+        const result = await sequelize.query(`CALL spu_getDetalles(:idproyecto)`,{
+            replacements: {idproyecto}
+
+        });
+
+        return result;
+    } 
+
 
     // REGISTRAR PROYECTO
     async registrarProyect(data) {

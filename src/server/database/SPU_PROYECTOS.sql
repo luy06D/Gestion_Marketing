@@ -23,10 +23,13 @@ BEGIN
 			descripcion
     FROM PROYECTOS PRO
     INNER JOIN CLIENTES CLI ON PRO.idcliente = CLI.idcliente
-    INNER JOIN PERSONAS PER ON CLI.idpersona  = PER.idpersona;
+    INNER JOIN PERSONAS PER ON CLI.idpersona  = PER.idpersona
+    WHERE idproyecto = _idproyecto;
 
 END //
 DELIMITER ; 
+
+CALL spu_getDetalles(2)
 
 -- RESGISTRAR PROYECTOS
 DELIMITER //

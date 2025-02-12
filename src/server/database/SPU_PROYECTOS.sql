@@ -29,7 +29,7 @@ BEGIN
 END //
 DELIMITER ; 
 
-CALL spu_getDetalles(2)
+CALL spu_getDetalles()
 
 -- RESGISTRAR PROYECTOS
 DELIMITER //
@@ -56,11 +56,45 @@ CALL spu_registrar_proyecto (
     '2025-03-01'
 );
 
+-- ACTUALIZAR PROYECTO
 
-select * from proyectos;
+DELIMITER // 
+CREATE PROCEDURE spu_updateProject
+(
+IN _idproyecto INT,
+IN _idcliente INT,
+IN _nombreP VARCHAR(50),
+IN _descripcion VARCHAR(200),
+IN _fecha_inicio DATE,
+IN 	_fecha_fin DATE
+)
+BEGIN 
+	
+    UPDATE PROYECTOS SET 
+    idcliente = _idcliente,
+    nombreP = _nombreP,
+    descripcion = _descripcion,
+    fecha_inicio = _fecha_inicio,
+    fecha_fin = fecha_fin
+    WHERE idproyecto = _idproyecto;
+
+END // 
+DELIMITER ; 
+
+select * from proyectos 
+
+-- CAMBIO DE ESTADO PARA DAR DE BAJA UN PROYECTO
+DELIMITER //
+CREATE PROCEDURE spu_deleteProyect(IN _idproyecto INT)
+BEGIN 
+	UPDATE PROYECTOS SET estado_del = 0
+    WHERE idproyecto = _idproyecto;
+
+END // 
+DELIMITER ; 
 
 
 
-delete from proyectos
-where idproyecto in (10,9)
+
+
 

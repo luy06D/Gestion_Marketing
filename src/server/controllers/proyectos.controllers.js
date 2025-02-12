@@ -16,9 +16,9 @@ const getProjects = async (req, res) => {
 
 // LIST PROJECTS DETAILS
 
-const getDetailsP = async(rep, res) =>{
+const getDetailsP = async(req, res) =>{
     try {
-        const { idproyecto }  = req.body;
+        const { idproyecto }  = req.params;
         const response = await service.getDetailsProjects(idproyecto);
         res.json(response);
         
@@ -41,4 +41,4 @@ const createProyect = async (req, res) =>{
     }
 }
 
-export default {getProjects, createProyect}
+export default {getProjects, createProyect, getDetailsP }

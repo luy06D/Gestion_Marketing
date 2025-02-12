@@ -4,6 +4,7 @@ const router = express.Router();
 
 router
     .get('/', proyectoControllers.getProjects)
+    .get('/:idproyecto', proyectoControllers.getDetailsP)
     .post('/', proyectoControllers.createProyect);
 
 export default router; 

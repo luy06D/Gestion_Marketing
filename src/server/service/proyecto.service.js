@@ -13,10 +13,12 @@ class ProyectoService{
     // GET PROJECTS DETAILS
     async getDetailsProjects(idproyecto){
         const result = await sequelize.query(`CALL spu_getDetalles(:idproyecto)`,{
-            replacements: {idproyecto}
+            replacements: {idproyecto},
+            raw:true
 
+            
         });
-
+        
         return result;
     } 
 

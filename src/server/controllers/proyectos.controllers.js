@@ -1,7 +1,7 @@
 import ProyectoService from '../service/proyecto.service.js';
 const service = new ProyectoService();
 
-// LISTAR PROYECTOS
+// // LISTAR PROYECTOS
 const getProjects = async (req, res) => {
     try {
         const response = await service.listarProjects();
@@ -22,7 +22,7 @@ const getDetailsP = async(req, res) =>{
         const response = await service.getDetailsProjects(idproyecto);
         res.json(response);
         
-    } catch (error) {
+    } catch (err) {
         res.status(500).send({success: false , message: err.message})
     } 
 }

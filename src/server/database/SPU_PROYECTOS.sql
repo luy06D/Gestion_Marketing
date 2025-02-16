@@ -29,7 +29,7 @@ BEGIN
 END //
 DELIMITER ; 
 
-CALL spu_getDetalles()
+CALL spu_getDetalles(2)
 
 -- RESGISTRAR PROYECTOS
 DELIMITER //
@@ -81,7 +81,16 @@ BEGIN
 END // 
 DELIMITER ; 
 
-select * from proyectos 
+CALL spu_updateProject (
+    1, 
+    'Campaña de publicidad Digital',
+    'Campaña digital para lanzamiento de un producto',
+    '2025-01-22',
+    '2025-03-01',
+    2
+);
+
+
 
 -- CAMBIO DE ESTADO PARA DAR DE BAJA UN PROYECTO
 DELIMITER //

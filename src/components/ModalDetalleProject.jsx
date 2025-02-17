@@ -1,11 +1,16 @@
 // ESTO ES UN SNIPPETS 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Modal, ModalContent, ModalHeader, ModalBody,ModalFooter,
     Button, Divider, Input, Textarea, User, Card, CardHeader, CardBody, CardFooter,
    Link, Image} from "@nextui-org/react";
 import styled from 'styled-components';
+import useProjectsDetails from '../hooks/useFetchProjectDetails';
 
-const ModalDetalleP = ({isOpen , onClose}) => {
+const ModalDetalleP = ({isOpen , onClose, isIdProject}) => {
+
+  const projectData = useProjectsDetails(isIdProject);
+  
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} size='lg' scrollBehavior='inside'
     backdrop="opaque"
@@ -19,11 +24,11 @@ const ModalDetalleP = ({isOpen , onClose}) => {
               <ModalBody>
               <TextS>Detalles del cliente</TextS>
               <div className="flex w-full flex-wrap md:flex-nowrap gap-4">       
-                <Input key='outside-left' label="Fecha Ini. : " labelPlacement='outside-left' type="text"/>
-                <Input key='outside-left' label="Fecha Fin :" labelPlacement='outside-left' type="text"/>
+                <Input  label="Fecha Ini. : " labelPlacement='outside-left' value={projectData.fecha_inicio} disabled type="text"/>
+                <Input label="Fecha Fin :" labelPlacement='outside-left' value={projectData.fecha_fin} disabled type="text"/>
               </div>
-              <Input key='outside-left' label="Cliente :" labelPlacement='outside-left' type="text"/>
-              <Textarea label="Descrip : " labelPlacement= 'outside-left' type="text" />
+              <Input label="Cliente :" labelPlacement='outside-left' value={projectData.cliente} disabled type="text"/>
+              <Textarea label="Descrip : " labelPlacement= 'outside-left' value={projectData.descripcion} disabled  type="text" />
               <Divider className='mt-3'/>
               <TextS>Equipo acargo</TextS>
               <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mt-2">       
@@ -94,7 +99,7 @@ const ModalDetalleP = ({isOpen , onClose}) => {
                 <Button color="danger" variant="shadow" onPress={onClose}>
                   Cerrar
                 </Button>
-                <Button color="success" variant='shadow' onPress={onClose}>
+                <Button color="success" variant='shadow'>
                   Iniciar
                 </Button>
               </ModalFooter>

@@ -17,6 +17,7 @@ import { showError, showWarning } from '../utils/toastUtils';
 const Proyectos = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModalDetOpen , setModalDetOpen] = useState(false);
+  const [isIdProject, setIdProject] = useState(null)
   const {project, fetchProjects} = useFetchProject();
 
   // CAMBIO DE ESTADOS PARA MODAL REGISTRO
@@ -24,7 +25,10 @@ const Proyectos = () => {
   const closeModal = () => setModalOpen(false);
 
   // CAMBIO DE ESTADOS PARA MODAL DETALLE DE PROYECTOS
-  const openModalP = () => setModalDetOpen(true);
+  const handleOpenModal = (idproyecto) =>{
+    setModalDetOpen(true);
+    setIdProject(idproyecto)
+  }
   const closeModalP = () => setModalDetOpen(false);
 
   const handlePrueba = () =>{
@@ -43,7 +47,7 @@ const Proyectos = () => {
     <Container>
       
        <ModalP isOpen={isModalOpen} onClose={closeModal} fetchProjects={fetchProjects} />
-       <ModalDetalleP isOpen={isModalDetOpen} onClose={closeModalP}/>
+       <ModalDetalleP isOpen={isModalDetOpen} onClose={closeModalP} isIdProject={isIdProject}/>
 
       <div className='title-pro'>
         <h1>GESTION DE PROYECTO</h1>
@@ -78,7 +82,7 @@ const Proyectos = () => {
                     <TableCell className='relative flex items-center gap-2'>
                       <Tooltip content="Detalles" color='success'>
                         <span className="text-lg text-default-400 text-success cursor-pointer active:opacity-50">
-                          <EyeIcon onClick={openModalP}/>
+                          <EyeIcon onClick={() => handleOpenModal(item.idproyecto)}/>
                         </span>
                       </Tooltip>
                       <Tooltip content="Editar" color='warning'>

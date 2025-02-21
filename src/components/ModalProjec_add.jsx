@@ -5,12 +5,11 @@ import { Modal, ModalContent, ModalHeader, ModalBody,ModalFooter,Button,Input,
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import styled from 'styled-components';
 import {format} from 'date-fns'
-import { showSuccess, showError, showWarning } from '../utils/toastUtils';
+import { showSuccess, showWarning } from '../utils/toastUtils';
 
 
-
-const ModalProyecto = ({isOpen, onClose, fetchProjects}) => {
-
+const ModalProyecto = ({isOpen, onClose, fetchProjects, editMode, isIdProject}) => {
+    // EditMode prop para editar en el mismo modal 
 
   const [search , setSearch] = useState("");
   const [dataClient , setDataClient]  = useState({});
@@ -113,6 +112,9 @@ const ModalProyecto = ({isOpen, onClose, fetchProjects}) => {
   }
 
 
+  const handleEditProject = () =>{
+    console.log(isIdProject)
+  }
 
 
 
@@ -126,7 +128,8 @@ const ModalProyecto = ({isOpen, onClose, fetchProjects}) => {
 
       {(onClose) => (
         <>
-          <ModalHeader className="flex flex-col gap-1">REGISTRO DE PROYECTOS</ModalHeader>
+          <ModalHeader className="flex flex-col gap-1">
+          {editMode ? "EDITAR PROYECTO": "REGISTRAR PROYECTO "}</ModalHeader>
           <ModalBody>
             <TextS>Datos del cliente</TextS>
            <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
@@ -169,8 +172,10 @@ const ModalProyecto = ({isOpen, onClose, fetchProjects}) => {
             <Button color="danger" variant="shadow" onPress={onClose}>
               Cerrar
             </Button>
-            <Button color="primary" variant='shadow' onPress={handleSumit} >
-              Registrar
+            <Button color={editMode ? "warning": "primary"} 
+                    variant='shadow' 
+                    onPress={editMode ? handleEditProject: handleSumit } >
+              {editMode ? "Guardar cambios" : "Registrar"}
             </Button>
           </ModalFooter>
         </>

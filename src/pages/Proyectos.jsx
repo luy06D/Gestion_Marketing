@@ -15,14 +15,29 @@ import { showError, showWarning } from '../utils/toastUtils';
 
 
 const Proyectos = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [isModalDetOpen , setModalDetOpen] = useState(false);
-  const [isIdProject, setIdProject] = useState(null)
-  const {project, fetchProjects} = useFetchProject();
+  const [isModalOpen, setModalOpen] = useState(false); // Abrir modal registro
+  const [isModalDetOpen , setModalDetOpen] = useState(false); // Abrir modal detalle proyec
+  const [isIdProject, setIdProject] = useState(null) // idproyecto
+  const {project, fetchProjects} = useFetchProject(); // Api listado de proyectos
+  const [editMode, setEditMode] = useState(false); // Estado para editar / Modal registro
+
 
   // CAMBIO DE ESTADOS PARA MODAL REGISTRO
-  const openModal = () => setModalOpen(true);
+  const handleNewProject = () =>{
+    setModalOpen(true);
+    setEditMode(false);
+  }
+
+  //ABRE EL MODAL PARA EDITAR 
+  const handleEdit = (idproyecto) => {
+    setEditMode(true),
+    setModalOpen(true);
+    setIdProject(idproyecto)
+    
+  }
+  
   const closeModal = () => setModalOpen(false);
+
 
   // CAMBIO DE ESTADOS PARA MODAL DETALLE DE PROYECTOS
   const handleOpenModal = (idproyecto) =>{
@@ -30,6 +45,7 @@ const Proyectos = () => {
     setIdProject(idproyecto)
   }
   const closeModalP = () => setModalDetOpen(false);
+
 
   const handlePrueba = () =>{
     showError("PROYECTOS")
@@ -46,8 +62,16 @@ const Proyectos = () => {
     
     <Container>
       
-       <ModalP isOpen={isModalOpen} onClose={closeModal} fetchProjects={fetchProjects} />
-       <ModalDetalleP isOpen={isModalDetOpen} onClose={closeModalP} isIdProject={isIdProject}/>
+       <ModalP isOpen={isModalOpen}
+               onClose={closeModal} 
+               fetchProjects={fetchProjects} 
+               editMode={editMode}
+               isIdProject={isIdProject}
+
+                />
+       <ModalDetalleP isOpen={isModalDetOpen}
+                      onClose={closeModalP} 
+                      isIdProject={isIdProject}/>
 
       <div className='title-pro'>
         <h1>GESTION DE PROYECTO</h1>
@@ -59,7 +83,7 @@ const Proyectos = () => {
           <Card>
             <CardBody>
             <div className='btn-new mb-5 mt-2'>
-               <Button onPress={openModal} color='primary' variant='shadow'>Nuevo proyecto</Button>
+               <Button onPress={handleNewProject} color='primary' variant='shadow'>Nuevo proyecto</Button>
                <Button onPress={handlePrueba} color='danger' variant='shadow'><BsFileEarmarkPdf/></Button>
                <Button onPress={handlePrueba2} color='success' variant='shadow'><RiFileExcel2Line/></Button>
             </div>
@@ -87,7 +111,7 @@ const Proyectos = () => {
                       </Tooltip>
                       <Tooltip content="Editar" color='warning'>
                         <span className="text-lg text-default-400 text-warning cursor-pointer active:opacity-50">
-                          <EditIcon />
+                          <EditIcon onClick={handleEdit} />
                         </span>
                       </Tooltip>
                       <Tooltip content="Deshabilitar" color='danger'>
